@@ -28,8 +28,17 @@ public:
 	UCameraComponent* CameraComponent;
 
 	UPROPERTY(EditAnywhere)
-	float horizontalRotationSpeed;
+	float HorizontalRotationSpeed;
 
+	UPROPERTY(EditAnywhere)
+	float HotizontalMaxLimit;
+
+	UPROPERTY(EditAnywhere)
+	float VerticalRotationSpeed;
+	
+	UPROPERTY(EditAnywhere)
+	float VerticalMaxLimit;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -37,9 +46,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	void HorizontalRotation(FVector2d rotationValue);
+	
+	void CameraRotation(FVector2d rotationValue);
 };

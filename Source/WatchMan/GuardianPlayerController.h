@@ -22,9 +22,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-
-	UPROPERTY(EditAnywhere)
-	APlayerCamera* Player;
 	
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Context")
 	class UInputMappingContext* InputContext;
@@ -35,7 +32,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Vartical")
 	UInputAction* VerticalInput;
 
+	UPROPERTY(EditAnywhere)
+	APlayerCamera* PlayerCamera;
+
 	virtual void SetupInputComponent() override;
 
 	void PlayerRotation(const FInputActionValue& Value);
+
+	void ShowInputMessage(FString Message);
 };

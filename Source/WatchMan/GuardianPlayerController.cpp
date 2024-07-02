@@ -16,7 +16,7 @@ void AGuardianPlayerController::SetupInputComponent()
 	if(world)
 	{
 		FActorSpawnParameters SpawnParameters;
-		Player = Cast<APlayerCamera>(GetLocalPlayer());
+		PlayerCamera = Cast<APlayerCamera>(GetLocalPlayer());
 		//Player->PossessedBy(this);
 	}
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
@@ -34,4 +34,12 @@ void AGuardianPlayerController::SetupInputComponent()
 
 void AGuardianPlayerController::PlayerRotation(const FInputActionValue& Value)
 {
+	FVector2d InputVector = Value.Get<FVector2D>();
+	ShowInputMessage(InputVector.ToString());
+	PlayerCamera->CameraRotation(InputVector);
+}
+
+void AGuardianPlayerController::ShowInputMessage(FString Message)
+{
+	GEngine->AddOnScreenDebugMessage(FMath::Rand(), 0.2f, FColor::Magenta, Message);
 }

@@ -33,18 +33,18 @@ void APlayerCamera::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void APlayerCamera::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void APlayerCamera::CameraRotation(FVector2d rotationValue)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
-void APlayerCamera::HorizontalRotation(FVector2d rotationValue)
-{
+	const float relativeYRotation = CameraComponent->GetRelativeRotation().Yaw;
+	const float yRotation = relativeYRotation + rotationValue.Y * VerticalRotationSpeed * 0.1;
+	const float clampedYRotation = FMath::Clamp(yRotation, 0, VerticalMaxLimit);
+	
 	const float relativeZRotation = CameraComponent->GetRelativeRotation().Roll;
-	const FRotator CameraHorizontalRotation = FRotator(0,0,
-		relativeZRotation + rotationValue.X * horizontalRotationSpeed * 0.1f);
+	const float zRotation = relativeZRotation + rotationValue.X * HorizontalRotationSpeed * 0.1f;
+	const float clampedZRotation = FMath::Clamp(zRotation, 0, HotizontalMaxLimit);
+	
+	const FRotator CameraHorizontalRotation = FRotator(0,clampedYRotation,
+		clampedZRotation);
 	CameraComponent->AddRelativeRotation(CameraHorizontalRotation);
 }
 
