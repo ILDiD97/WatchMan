@@ -3,6 +3,7 @@
 
 #include "PlayerCamera.h"
 
+
 // Sets default values
 APlayerCamera::APlayerCamera()
 {
@@ -12,14 +13,19 @@ APlayerCamera::APlayerCamera()
 	//SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	//RootComponent = SpringArm;
 	
-	//Arrow = CreateDefaultSubobject<UArrowComponent>("Pivot");
-	//Arrow->SetupAttachment(RootComponent);
+	Arrow = CreateDefaultSubobject<UArrowComponent>("Pivot");
+	RootComponent = Arrow;
 
 	//CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
 	//RootComponent = CameraComponent;
 	
 	CineCameraComponent = CreateDefaultSubobject<UCineCameraComponent>("CineCamera");
-	RootComponent = CineCameraComponent;
+	CineCameraComponent->SetupAttachment(Arrow);
+	CineCameraComponent->SetActive(true);
+
+	RoomCineCameraComponent = CreateDefaultSubobject<UCineCameraComponent>("RommCamera");
+	RoomCineCameraComponent->SetupAttachment(Arrow);
+	RoomCineCameraComponent->SetActive(false);
 }
 
 // Called when the game starts or when spawned
@@ -38,17 +44,23 @@ void APlayerCamera::Tick(float DeltaTime)
 
 void APlayerCamera::CameraRotation(FVector2d rotationValue)
 {
-	const float relativeXRotation = GetActorRotation().Pitch;
+	const float relativeXRotation = CineCameraComponent->GetComponentRotation().Pitch;
 	const float XRotation = relativeXRotation + rotationValue.Y * VerticalRotationSpeed * 0.1;
 	const float clampedXRotation = FMath::Clamp(XRotation, -VerticalMaxLimit, VerticalMaxLimit);
 	
-	const float relativeYRotation = GetActorRotation().Yaw;
+	const float relativeYRotation = CineCameraComponent->GetComponentRotation().Yaw;
 	const float YRotation = relativeYRotation + rotationValue.X * HorizontalRotationSpeed * 0.1f;
 	const float clampedYRotation = FMath::Clamp(YRotation, -HotizontalMaxLimit, HotizontalMaxLimit);
 	
 	const FRotator CameraHorizontalRotation = FRotator(clampedXRotation,
 		clampedYRotation,
 		0);
-	SetActorRotation(CameraHorizontalRotation);
+	CineCameraComponent->SetWorldRotation(CameraHorizontalRotation);
+}
+
+void APlayerCamera::ChangeCamera(bool change)
+{
+	CineCameraComponent->SetActive(!change);
+	RoomCineCameraComponent->SetActive(change);
 }
 

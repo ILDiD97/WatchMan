@@ -24,18 +24,30 @@ void AGuardianPlayerController::SetupInputComponent()
 
 	UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(InputComponent);
 
-	Input->BindAction(MouseInput,
+	Input->BindAction(RotateInput,
 		ETriggerEvent::Triggered, this, &AGuardianPlayerController::PlayerRotation);
-	Input->BindAction(MouseInput,
+	Input->BindAction(RotateInput,
 		ETriggerEvent::Completed, this, &AGuardianPlayerController::PlayerRotation);
+	Input->BindAction(CameraSelectionInput,
+		ETriggerEvent::Completed, this, &AGuardianPlayerController::PlayerCameraChange);
 	
 }
 
 void AGuardianPlayerController::PlayerRotation(const FInputActionValue& Value)
 {
-	FVector2d InputVector = Value.Get<FVector2D>();
-	//ShowInputMessage(InputVector.ToString());
-	PlayerCamera->CameraRotation(InputVector);
+	if(!CameraChange)
+	{
+		FVector2d InputVector = Value.Get<FVector2D>();
+		//ShowInputMessage(InputVector.ToString());
+		PlayerCamera->CameraRotation(InputVector);
+	}
+}
+
+void AGuardianPlayerController::PlayerCameraChange(const FInputActionValue& Value)
+{
+	CameraChange = !CameraChange;
+	PlayerCamera->ChangeCamera(CameraChange);
+	SetShowMouseCursor(CameraChange);
 }
 
 void AGuardianPlayerController::ShowInputMessage(FString Message)

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Components/ArrowComponent.h"
 #include "CinematicCamera/Public/CineCameraComponent.h"
 #include "PlayerCamera.generated.h"
 
@@ -19,14 +20,17 @@ public:
 	//UPROPERTY(EditAnywhere)
 	//USpringArmComponent* SpringArm;
 
-	//UPROPERTY(EditAnywhere)
-	//UArrowComponent* Arrow;
+	UPROPERTY(EditAnywhere)
+	UArrowComponent* Arrow;
 
 	//UPROPERTY(EditAnywhere)
 	//UCameraComponent* CameraComponent;
 
 	UPROPERTY(EditAnywhere)
 	UCineCameraComponent* CineCameraComponent;
+
+	UPROPERTY(EditAnywhere)
+	UCineCameraComponent* RoomCineCameraComponent;
 
 	UPROPERTY(EditAnywhere)
 	float HorizontalRotationSpeed;
@@ -49,4 +53,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	void CameraRotation(FVector2d rotationValue);
+
+	void ChangeCamera(bool change);
 };

@@ -26,18 +26,23 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Context")
 	class UInputMappingContext* InputContext;
 
-	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Horizontal")
-	UInputAction* MouseInput;
+	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Rotation")
+	UInputAction* RotateInput;
 
-	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Vartical")
-	UInputAction* VerticalInput;
+	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Camera Selection")
+	UInputAction*  CameraSelectionInput;
 
 	UPROPERTY(EditAnywhere)
 	APlayerCamera* PlayerCamera;
 
+	UPROPERTY(VisibleAnywhere)
+	bool CameraChange;
+
 	virtual void SetupInputComponent() override;
 
 	void PlayerRotation(const FInputActionValue& Value);
+
+	void PlayerCameraChange(const FInputActionValue& Value);
 
 	void ShowInputMessage(FString Message);
 };
