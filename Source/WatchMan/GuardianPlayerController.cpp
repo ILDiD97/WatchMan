@@ -3,22 +3,19 @@
 
 #include "GuardianPlayerController.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void AGuardianPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	PlayerCamera = Cast<APlayerCamera>(GetPawn());
 }
 
 void AGuardianPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
-
-	UWorld* world = GetWorld();
-	if(world)
-	{
-		FActorSpawnParameters SpawnParameters;
-		//PlayerCamera = world->GetAll
-		//Player->PossessedBy(this);
-	}
+	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 
@@ -31,6 +28,7 @@ void AGuardianPlayerController::SetupInputComponent()
 		ETriggerEvent::Triggered, this, &AGuardianPlayerController::PlayerRotation);
 	Input->BindAction(MouseInput,
 		ETriggerEvent::Completed, this, &AGuardianPlayerController::PlayerRotation);
+	
 }
 
 void AGuardianPlayerController::PlayerRotation(const FInputActionValue& Value)

@@ -3,10 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Camera/CameraComponent.h"
-#include "Components/ArrowComponent.h"
 #include "GameFramework/Pawn.h"
-#include "GameFramework/SpringArmComponent.h"
+#include "CinematicCamera/Public/CineCameraComponent.h"
 #include "PlayerCamera.generated.h"
 
 UCLASS()
@@ -18,14 +16,17 @@ public:
 	// Sets default values for this pawn's properties
 	APlayerCamera();
 
-	UPROPERTY(EditAnywhere)
-	USpringArmComponent* SpringArm;
+	//UPROPERTY(EditAnywhere)
+	//USpringArmComponent* SpringArm;
+
+	//UPROPERTY(EditAnywhere)
+	//UArrowComponent* Arrow;
+
+	//UPROPERTY(EditAnywhere)
+	//UCameraComponent* CameraComponent;
 
 	UPROPERTY(EditAnywhere)
-	UArrowComponent* Arrow;
-
-	UPROPERTY(EditAnywhere)
-	UCameraComponent* CameraComponent;
+	UCineCameraComponent* CineCameraComponent;
 
 	UPROPERTY(EditAnywhere)
 	float HorizontalRotationSpeed;

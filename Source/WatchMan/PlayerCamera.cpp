@@ -9,14 +9,17 @@ APlayerCamera::APlayerCamera()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
-	RootComponent = SpringArm;
+	//SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
+	//RootComponent = SpringArm;
 	
-	Arrow = CreateDefaultSubobject<UArrowComponent>("Pivot");
-	Arrow->SetupAttachment(RootComponent);
+	//Arrow = CreateDefaultSubobject<UArrowComponent>("Pivot");
+	//Arrow->SetupAttachment(RootComponent);
 
-	CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
-	CameraComponent->SetupAttachment(Arrow);
+	//CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
+	//RootComponent = CameraComponent;
+	
+	CineCameraComponent = CreateDefaultSubobject<UCineCameraComponent>("CineCamera");
+	RootComponent = CineCameraComponent;
 }
 
 // Called when the game starts or when spawned
@@ -35,16 +38,17 @@ void APlayerCamera::Tick(float DeltaTime)
 
 void APlayerCamera::CameraRotation(FVector2d rotationValue)
 {
-	const float relativeYRotation = CameraComponent->GetRelativeRotation().Yaw;
-	const float yRotation = relativeYRotation + rotationValue.Y * VerticalRotationSpeed * 0.1;
-	const float clampedYRotation = FMath::Clamp(yRotation, 0, VerticalMaxLimit);
+	const float relativeXRotation = GetActorRotation().Pitch;
+	const float XRotation = relativeXRotation + rotationValue.Y * VerticalRotationSpeed * 0.1;
+	const float clampedXRotation = FMath::Clamp(XRotation, -VerticalMaxLimit, VerticalMaxLimit);
 	
-	const float relativeZRotation = CameraComponent->GetRelativeRotation().Roll;
-	const float zRotation = relativeZRotation + rotationValue.X * HorizontalRotationSpeed * 0.1f;
-	const float clampedZRotation = FMath::Clamp(zRotation, 0, HotizontalMaxLimit);
+	const float relativeYRotation = GetActorRotation().Yaw;
+	const float YRotation = relativeYRotation + rotationValue.X * HorizontalRotationSpeed * 0.1f;
+	const float clampedYRotation = FMath::Clamp(YRotation, -HotizontalMaxLimit, HotizontalMaxLimit);
 	
-	const FRotator CameraHorizontalRotation = FRotator(0,clampedYRotation,
-		clampedZRotation);
-	CameraComponent->AddRelativeRotation(CameraHorizontalRotation);
+	const FRotator CameraHorizontalRotation = FRotator(clampedXRotation,
+		clampedYRotation,
+		0);
+	SetActorRotation(CameraHorizontalRotation);
 }
 
