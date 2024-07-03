@@ -7,12 +7,13 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "PlayerCamera.h"
-#include "PrisonerCharacter.h"
+#include "PrisonerCharacterController.h"
 #include "GuardianPlayerController.generated.h"
 
 /**
  * 
  */
+
 UCLASS()
 class WATCHMAN_API AGuardianPlayerController : public APlayerController
 {
@@ -32,21 +33,65 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Camera Selection")
 	UInputAction*  CameraSelectionInput;
+	
+	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Prisoner Selection")
+	UInputAction*  PrisonerSelectionInput;
 
+	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Input Prisoner Deselection")
+	UInputAction*  PrisonerDeselectionInput;
+
+	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Location Selection")
+	UInputAction*  LocationSelectionInput;
+	
 	UPROPERTY(EditAnywhere)
 	APlayerCamera* PlayerCamera;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APrisonerCharacterController>  PrisonerControllerClass;
+	
 	UPROPERTY(VisibleAnywhere)
-	TArray<APrisonerCharacter*> Prisoners;
+	TArray<APrisonerCharacterController*> PrisonersController;
+	
+	UPROPERTY(EditAnywhere)
+	TArray<FTransform> SpawnTransforms;
 
+	UPROPERTY(VisibleAnywhere)
+	APrisonerCharacterController* CurrentController;
+
+	UPROPERTY(VisibleAnywhere)
+	int CurrentID;
+	
+	UPROPERTY(EditAnywhere)
+	FVector CachedDestination;
+	
 	UPROPERTY(VisibleAnywhere)
 	bool CameraChange;
 
+	UFUNCTION()
+	void StartSpawnPrisoners();
+	
 	virtual void SetupInputComponent() override;
 
+	UFUNCTION()
 	void PlayerRotation(const FInputActionValue& Value);
 
+	UFUNCTION()
 	void PlayerCameraChange(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void OnStartedInput(const FInputActionValue& Value);
+	
+	UFUNCTION()
+	void SelectPrisoner(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void SelectLocation(const FInputActionValue& Value);
+	
+	UFUNCTION()
+	void GiveLocation(const FInputActionValue& Value);
+	
+	UFUNCTION()
+	void DeselectPrisoner(const FInputActionValue& Value);
 
 	void ShowInputMessage(FString Message);
 };

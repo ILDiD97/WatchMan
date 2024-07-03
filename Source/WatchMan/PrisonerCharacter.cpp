@@ -3,6 +3,7 @@
 
 #include "PrisonerCharacter.h"
 
+
 // Sets default values
 APrisonerCharacter::APrisonerCharacter()
 {
@@ -22,7 +23,9 @@ void APrisonerCharacter::BeginPlay()
 void APrisonerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
+
+
 
 
