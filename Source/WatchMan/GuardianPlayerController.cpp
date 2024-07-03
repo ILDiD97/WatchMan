@@ -98,7 +98,7 @@ void AGuardianPlayerController::SelectPrisoner(const FInputActionValue& Value)
 	{
 		FHitResult Hit;
 		bool bHitSuccessful = false;
-		bHitSuccessful = GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, Hit);
+		bHitSuccessful = GetHitResultUnderCursor(ECollisionChannel::ECC_Pawn, true, Hit);
 
 		if (bHitSuccessful)
 		{
