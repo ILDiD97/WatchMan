@@ -42,30 +42,33 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input", DisplayName = "Location Selection")
 	UInputAction*  LocationSelectionInput;
-	
-	UPROPERTY(EditAnywhere)
-	APlayerCamera* PlayerCamera;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Prisoners")
 	TSubclassOf<APrisonerCharacterController>  PrisonerControllerClass;
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category = "Prisoners")
 	TArray<APrisonerCharacterController*> PrisonersController;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Prisoners")
 	TArray<FTransform> SpawnTransforms;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category = "Prisoners")
 	APrisonerCharacterController* CurrentController;
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category = "Prisoners")
 	int CurrentID;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Prisoners")
 	FVector CachedDestination;
+
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	APlayerCamera* PlayerCamera;
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	bool CameraChange;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool IsWidgetControlled;
 
 	UFUNCTION()
 	void StartSpawnPrisoners();

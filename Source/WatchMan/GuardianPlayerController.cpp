@@ -86,7 +86,7 @@ void AGuardianPlayerController::PlayerCameraChange(const FInputActionValue& Valu
 
 void AGuardianPlayerController::OnStartedInput(const FInputActionValue& Value)
 {
-	if(CurrentController && CameraChange)
+	if(CurrentController && CameraChange && !IsWidgetControlled)
 	{
 		CurrentController->StopMovement();
 	}
@@ -94,7 +94,7 @@ void AGuardianPlayerController::OnStartedInput(const FInputActionValue& Value)
 
 void AGuardianPlayerController::SelectPrisoner(const FInputActionValue& Value)
 {
-	if(CameraChange)
+	if(CameraChange && !IsWidgetControlled)
 	{
 		FHitResult Hit;
 		bool bHitSuccessful = false;
@@ -116,7 +116,7 @@ void AGuardianPlayerController::SelectPrisoner(const FInputActionValue& Value)
 
 void AGuardianPlayerController::SelectLocation(const FInputActionValue& Value)
 {
-	if(CurrentController && CameraChange)
+	if(CurrentController && CameraChange && !IsWidgetControlled)
 	{
 		// We look for the location in the world where the player has pressed the input
 		FHitResult Hit;
@@ -134,7 +134,7 @@ void AGuardianPlayerController::SelectLocation(const FInputActionValue& Value)
 
 void AGuardianPlayerController::GiveLocation(const FInputActionValue& Value)
 {
-	if(CurrentController && CameraChange)
+	if(CurrentController && CameraChange && !IsWidgetControlled)
 	{
 		CurrentController->MoveToMousePoint(CachedDestination);
 	}

@@ -44,14 +44,8 @@ public:
 	// Sets default values for this character's properties
 	APrisonerCharacter();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "PrisonerStats")
 	FPrisonerStats Stats;
-	
-	UPROPERTY(EditAnywhere)
-	int Health;
-
-	UPROPERTY(EditAnywhere)
-	float Madness;
 
 protected:
 	// Called when the game starts or when spawned

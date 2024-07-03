@@ -20,7 +20,6 @@ void APrisonerCharacterController::SpawnPrisoners(FTransform controllerTransform
 		const FActorSpawnParameters SpawnParameters;
 		Prisoner = Cast<APrisonerCharacter>(world->SpawnActor(
 			PrisonerClass, &controllerTransform, SpawnParameters));
-		//Prisoner->ControllerID = currentID;
 		Possess(Prisoner);
 	}
 }
@@ -29,6 +28,7 @@ void APrisonerCharacterController::MoveToMousePoint(FVector loc)
 {
 	UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, loc);
 	//MoveToLocation(loc);
+	
 }
 
 

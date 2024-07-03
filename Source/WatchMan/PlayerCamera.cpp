@@ -9,15 +9,10 @@ APlayerCamera::APlayerCamera()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	//SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
-	//RootComponent = SpringArm;
+	
 	
 	Arrow = CreateDefaultSubobject<UArrowComponent>("Pivot");
 	RootComponent = Arrow;
-
-	//CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
-	//RootComponent = CameraComponent;
 	
 	CineCameraComponent = CreateDefaultSubobject<UCineCameraComponent>("CineCamera");
 	CineCameraComponent->SetupAttachment(Arrow);

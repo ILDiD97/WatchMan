@@ -21,22 +21,19 @@ protected:
 
 public:
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Controller")
 	int ID;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Controller")
 	TSubclassOf<APrisonerCharacter> PrisonerClass;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Controller")
 	APrisonerCharacter* Prisoner;
 
-	UPROPERTY(EditAnywhere)
-	FTransform SpawnTransform;
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "PrisonerStat")
 	FDataTableRowHandle PrisonerStats;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "PrisonerStat")
 	FPrisonerStats Stats;
 
 	UFUNCTION()

@@ -17,34 +17,28 @@ public:
 	// Sets default values for this pawn's properties
 	APlayerCamera();
 
-	//UPROPERTY(EditAnywhere)
-	//USpringArmComponent* SpringArm;
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	UArrowComponent* Arrow;
 
-	//UPROPERTY(EditAnywhere)
-	//UCameraComponent* CameraComponent;
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	UCineCameraComponent* CineCameraComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	UCineCameraComponent* RoomCineCameraComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "CameraStat")
 	float HorizontalRotationSpeed;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "CameraStat")
 	float HotizontalMaxLimit;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "CameraStat")
 	float VerticalRotationSpeed;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "CameraStat")
 	float VerticalMaxLimit;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "CameraStat")
 	FRotator InitialRot;
 	
 protected:
