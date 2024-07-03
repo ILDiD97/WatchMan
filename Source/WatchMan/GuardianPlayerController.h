@@ -7,6 +7,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "PlayerCamera.h"
+#include "PrisonerCharacter.h"
 #include "GuardianPlayerController.generated.h"
 
 /**
@@ -34,6 +35,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	APlayerCamera* PlayerCamera;
+
+	UPROPERTY(VisibleAnywhere)
+	TArray<APrisonerCharacter*> Prisoners;
 
 	UPROPERTY(VisibleAnywhere)
 	bool CameraChange;

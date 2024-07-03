@@ -10,6 +10,15 @@ void AGuardianPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	PlayerCamera = Cast<APlayerCamera>(GetPawn());
+
+	UWorld* world = GetWorld();
+	if(world)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+		
+		}
+	}
 }
 
 void AGuardianPlayerController::SetupInputComponent()
