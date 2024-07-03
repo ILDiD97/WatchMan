@@ -43,6 +43,9 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	float VerticalMaxLimit;
+
+	UPROPERTY(EditAnywhere)
+	FRotator InitialRot;
 	
 protected:
 	// Called when the game starts or when spawned

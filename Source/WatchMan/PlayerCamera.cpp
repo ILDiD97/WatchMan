@@ -32,7 +32,8 @@ APlayerCamera::APlayerCamera()
 void APlayerCamera::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	CineCameraComponent->SetWorldRotation(InitialRot);
 }
 
 // Called every frame

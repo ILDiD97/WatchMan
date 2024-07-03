@@ -57,7 +57,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	APrisonerCharacterController* CurrentController;
-
+	
 	UPROPERTY(VisibleAnywhere)
 	int CurrentID;
 	

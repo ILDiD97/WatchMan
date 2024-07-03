@@ -94,7 +94,6 @@ void AGuardianPlayerController::OnStartedInput(const FInputActionValue& Value)
 
 void AGuardianPlayerController::SelectPrisoner(const FInputActionValue& Value)
 {
-	ShowInputMessage("cIAO");
 	if(CameraChange)
 	{
 		FHitResult Hit;
@@ -117,7 +116,6 @@ void AGuardianPlayerController::SelectPrisoner(const FInputActionValue& Value)
 
 void AGuardianPlayerController::SelectLocation(const FInputActionValue& Value)
 {
-	ShowInputMessage("cIAO");
 	if(CurrentController && CameraChange)
 	{
 		// We look for the location in the world where the player has pressed the input
@@ -129,7 +127,6 @@ void AGuardianPlayerController::SelectLocation(const FInputActionValue& Value)
 		if (bHitSuccessful)
 		{
 			CachedDestination = Hit.Location;
-			ShowInputMessage(CachedDestination.ToString());
 		}
 		
 	}
