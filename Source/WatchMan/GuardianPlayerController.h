@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GuardianHUD.h"
 #include "PlayerCamera.h"
 #include "PrisonerCharacterController.h"
 #include "GuardianPlayerController.generated.h"
@@ -46,13 +47,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Prisoners")
 	TSubclassOf<APrisonerCharacterController>  PrisonerControllerClass;
 	
-	UPROPERTY(VisibleAnywhere, Category = "Prisoners")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoners")
 	TArray<APrisonerCharacterController*> PrisonersController;
 	
 	UPROPERTY(EditAnywhere, Category = "Prisoners")
 	TArray<FTransform> SpawnTransforms;
 
-	UPROPERTY(VisibleAnywhere, Category = "Prisoners")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoners")
 	APrisonerCharacterController* CurrentController;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Prisoners")
@@ -61,17 +62,32 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Prisoners")
 	FVector CachedDestination;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Prisoners")
+	FDataTableRowHandle PrisonerStats;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Prisoners")
+	TArray<FName> RowNames;
+
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	APlayerCamera* PlayerCamera;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	bool CameraChange;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, Category = "Interface")
+	AGuardianHUD* GuardianHUD;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Interface")
 	bool IsWidgetControlled;
 
 	UFUNCTION()
 	void StartSpawnPrisoners();
+
+	UFUNCTION(BlueprintCallable)
+	void StartPrisonerSetup();
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartPrisonerParameter();
 	
 	virtual void SetupInputComponent() override;
 

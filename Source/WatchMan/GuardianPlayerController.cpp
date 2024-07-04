@@ -11,6 +11,8 @@ void AGuardianPlayerController::BeginPlay()
 
 	PlayerCamera = Cast<APlayerCamera>(GetPawn());
 
+	GuardianHUD = Cast<AGuardianHUD>(this->GetHUD());
+	
 	StartSpawnPrisoners();
 }
 
@@ -26,11 +28,15 @@ void AGuardianPlayerController::StartSpawnPrisoners()
 				Cast<APrisonerCharacterController>(world->SpawnActor(
 					PrisonerControllerClass, &SpawnTransforms[i],SpawnParameters));
 			controller->ID = i;
-			controller->SpawnTransform = SpawnTransforms[i];
 			controller->SpawnPrisoners(SpawnTransforms[i], i);
 			PrisonersController.Add(controller);
 		}
 	}
+}
+
+void AGuardianPlayerController::StartPrisonerSetup()
+{
+	StartPrisonerParameter();
 }
 
 void AGuardianPlayerController::SetupInputComponent()
@@ -70,7 +76,7 @@ void AGuardianPlayerController::SetupInputComponent()
 
 void AGuardianPlayerController::PlayerRotation(const FInputActionValue& Value)
 {
-	if(!CameraChange)
+	if(!CameraChange && !IsWidgetControlled)
 	{
 		FVector2d InputVector = Value.Get<FVector2D>();
 		PlayerCamera->CameraRotation(InputVector);
@@ -79,9 +85,12 @@ void AGuardianPlayerController::PlayerRotation(const FInputActionValue& Value)
 
 void AGuardianPlayerController::PlayerCameraChange(const FInputActionValue& Value)
 {
-	CameraChange = !CameraChange;
-	PlayerCamera->ChangeCamera(CameraChange);
-	SetShowMouseCursor(CameraChange);
+	if(!IsWidgetControlled)
+	{
+		CameraChange = !CameraChange;
+		PlayerCamera->ChangeCamera(CameraChange);
+		SetShowMouseCursor(CameraChange);
+	}
 }
 
 void AGuardianPlayerController::OnStartedInput(const FInputActionValue& Value)
@@ -110,7 +119,6 @@ void AGuardianPlayerController::SelectPrisoner(const FInputActionValue& Value)
 				CurrentController = PrisonersController[CurrentID];
 			}
 		}
-		
 	}
 }
 

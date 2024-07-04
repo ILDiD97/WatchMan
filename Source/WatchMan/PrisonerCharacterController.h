@@ -29,11 +29,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Controller")
 	APrisonerCharacter* Prisoner;
-
-	UPROPERTY(EditAnywhere, Category = "PrisonerStat")
-	FDataTableRowHandle PrisonerStats;
 	
-	UPROPERTY(EditAnywhere, Category = "PrisonerStat")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PrisonerStat")
 	FPrisonerStats Stats;
 
 	UFUNCTION()

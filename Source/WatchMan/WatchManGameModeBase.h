@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GuardianPlayerController.h"
+#include "GuardianHUD.h"
 #include "GameFramework/GameModeBase.h"
 #include "WatchManGameModeBase.generated.h"
 

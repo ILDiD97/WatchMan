@@ -3,7 +3,8 @@
 
 #include "WatchManGameModeBase.h"
 
-#include "GuardianPlayerController.h"
+
+
 
 
 AWatchManGameModeBase::AWatchManGameModeBase()
@@ -18,6 +19,12 @@ AWatchManGameModeBase::AWatchManGameModeBase()
 		PlayerPawnFinder(TEXT("/Game/Player/BP_PlayerCamera"));
 
 	DefaultPawnClass = PlayerPawnFinder.Class;
+
+	const ConstructorHelpers::FClassFinder<AGuardianHUD>
+		HUDFinder(
+			TEXT("/Game/UserInterface/BP_GuardianHUD"));
+
+	HUDClass = HUDFinder.Class;
 	
 }
 
