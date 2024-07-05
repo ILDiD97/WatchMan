@@ -20,7 +20,6 @@ public:
 
 	AWatchManGameModeBase();
 
-	
 protected:
 	
 	virtual void BeginPlay() override;

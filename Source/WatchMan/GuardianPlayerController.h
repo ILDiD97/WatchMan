@@ -9,6 +9,7 @@
 #include "GuardianHUD.h"
 #include "PlayerCamera.h"
 #include "PrisonerCharacterController.h"
+#include "TimeManager.h"
 #include "GuardianPlayerController.generated.h"
 
 /**
@@ -65,14 +66,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Prisoners")
 	FDataTableRowHandle PrisonerStats;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Prisoners")
-	TArray<FName> RowNames;
-
-	UPROPERTY(EditAnywhere, Category = "Camera")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	APlayerCamera* PlayerCamera;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	bool CameraChange;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	bool WaitToCameraRot;
 
 	UPROPERTY(VisibleAnywhere, Category = "Interface")
 	AGuardianHUD* GuardianHUD;
@@ -80,6 +81,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Interface")
 	bool IsWidgetControlled;
 
+	UPROPERTY(EditAnywhere, Category = "Time")
+	TSubclassOf<ATimeManager> TimeManagerClass;
+
+	UPROPERTY(VisibleAnywhere,Category = "Time")
+	ATimeManager* TimeManager;
+	
 	UFUNCTION()
 	void StartSpawnPrisoners();
 
@@ -97,6 +104,18 @@ public:
 	UFUNCTION()
 	void PlayerCameraChange(const FInputActionValue& Value);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void CameraChangeRotation();
+	
+	UFUNCTION(BlueprintCallable)
+	void ChangeCamera();
+
+	UFUNCTION(BlueprintPure)
+	FRotator CameraRot();
+
+	UFUNCTION(BlueprintPure)
+	APlayerCamera* CameraCurrentRot();
+
 	UFUNCTION()
 	void OnStartedInput(const FInputActionValue& Value);
 	
@@ -111,6 +130,9 @@ public:
 	
 	UFUNCTION()
 	void DeselectPrisoner(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintCallable)
+	void EndDay();
 
 	void ShowInputMessage(FString Message);
 };

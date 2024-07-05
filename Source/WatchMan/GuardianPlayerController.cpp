@@ -4,6 +4,7 @@
 #include "GuardianPlayerController.h"
 
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 void AGuardianPlayerController::BeginPlay()
 {
@@ -31,6 +32,9 @@ void AGuardianPlayerController::StartSpawnPrisoners()
 			controller->SpawnPrisoners(SpawnTransforms[i], i);
 			PrisonersController.Add(controller);
 		}
+
+		TimeManager = Cast<ATimeManager>(world->SpawnActor(
+			TimeManagerClass, &PlayerCamera->GetTransform(),SpawnParameters));
 	}
 }
 
@@ -85,12 +89,31 @@ void AGuardianPlayerController::PlayerRotation(const FInputActionValue& Value)
 
 void AGuardianPlayerController::PlayerCameraChange(const FInputActionValue& Value)
 {
+	WaitToCameraRot = !WaitToCameraRot;
 	if(!IsWidgetControlled)
 	{
 		CameraChange = !CameraChange;
-		PlayerCamera->ChangeCamera(CameraChange);
-		SetShowMouseCursor(CameraChange);
+		CameraChangeRotation();
 	}
+}
+
+void AGuardianPlayerController::ChangeCamera()
+{
+	PlayerCamera->ChangeCamera(CameraChange);
+	SetShowMouseCursor(CameraChange);
+}
+
+FRotator AGuardianPlayerController::CameraRot()
+{
+	FRotator rot = UKismetMathLibrary::FindLookAtRotation(
+		PlayerCamera->CineCameraComponent->GetRelativeLocation(),
+		PlayerCamera->Monitor->GetRelativeLocation());
+	return rot;
+}
+
+APlayerCamera* AGuardianPlayerController::CameraCurrentRot()
+{
+	return PlayerCamera;
 }
 
 void AGuardianPlayerController::OnStartedInput(const FInputActionValue& Value)
@@ -151,6 +174,11 @@ void AGuardianPlayerController::GiveLocation(const FInputActionValue& Value)
 void AGuardianPlayerController::DeselectPrisoner(const FInputActionValue& Value)
 {
 	CurrentController = nullptr;
+}
+
+void AGuardianPlayerController::EndDay()
+{
+	TimeManager->NextDay();
 }
 
 void AGuardianPlayerController::ShowInputMessage(FString Message)

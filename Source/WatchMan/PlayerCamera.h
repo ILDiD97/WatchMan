@@ -20,7 +20,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	UArrowComponent* Arrow;
 
-	UPROPERTY(EditAnywhere, Category = "Camera")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	UArrowComponent* Monitor;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	UCineCameraComponent* CineCameraComponent;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -48,8 +51,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
-	void CameraRotation(FVector2d rotationValue);
 
+	UFUNCTION()
+	void CameraRotation(FVector2D rotationValue);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void RotateCameraToMonitor(float alphaLerp);
+
+	UFUNCTION()
 	void ChangeCamera(bool change);
 };

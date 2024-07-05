@@ -10,9 +10,11 @@ APlayerCamera::APlayerCamera()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	
 	Arrow = CreateDefaultSubobject<UArrowComponent>("Pivot");
 	RootComponent = Arrow;
+	
+	Monitor = CreateDefaultSubobject<UArrowComponent>("Monitor");
+	Monitor->SetupAttachment(Arrow);
 	
 	CineCameraComponent = CreateDefaultSubobject<UCineCameraComponent>("CineCamera");
 	CineCameraComponent->SetupAttachment(Arrow);
@@ -38,7 +40,7 @@ void APlayerCamera::Tick(float DeltaTime)
 
 }
 
-void APlayerCamera::CameraRotation(FVector2d rotationValue)
+void APlayerCamera::CameraRotation(FVector2D rotationValue)
 {
 	const float relativeXRotation = CineCameraComponent->GetComponentRotation().Pitch;
 	const float XRotation = relativeXRotation + rotationValue.Y * VerticalRotationSpeed * 0.1;
