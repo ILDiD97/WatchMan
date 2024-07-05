@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	ATimeManager();
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int Days;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

@@ -24,6 +24,9 @@ public:
 	// Sets default values for this actor's properties
 	AItemBase();
 
+	UPROPERTY(EditAnywhere, Category = "Item")
+	UStaticMeshComponent* ItemMesh;
+
 	UPROPERTY(VisibleAnywhere, Category = "Prisoner")
 	APrisonerCharacterController* PrisonerOwner;
 

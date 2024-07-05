@@ -32,6 +32,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PrisonerStat")
 	FPrisonerStats Stats;
+	
 
 	UFUNCTION()
 	void SpawnPrisoners(FTransform controllerTransform, int currentID);

@@ -35,6 +35,22 @@ struct WATCHMAN_API FDataPrisoner : public FTableRowBase
 	
 };
 
+UENUM(BlueprintType)
+enum class EActionAnimation : uint8
+{
+	Crying UMETA(DisplayName = "Crying"),
+	Sleeping UMETA(DisplayName = "Sleeping"),
+	Laughing UMETA(DisplayName = "Laughing"),
+	Fight UMETA(DisplayName = "Fight"),
+	Mirroring UMETA(DisplayName = "Mirroring"),
+	Give UMETA(DisplayName = "Give"),
+	Eat UMETA(DisplayName = "Eat"),
+	Read UMETA(DisplayName = "Read"),
+	ThrowCoin UMETA(DisplayName = "ThrowCoin"),
+	Damaged UMETA(DisplayName = "Damaged"),
+	Dead UMETA(DisplayName = "Dead"),
+};
+
 UCLASS()
 class WATCHMAN_API APrisonerCharacter : public ACharacter
 {
@@ -44,8 +60,14 @@ public:
 	// Sets default values for this character's properties
 	APrisonerCharacter();
 
-	UPROPERTY(EditAnywhere, Category = "PrisonerStats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PrisonerStats")
 	FPrisonerStats Stats;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PrisonerAnimation")
+	EActionAnimation ActionAnimation;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PrisonerAnimation")
+	bool IsInAction;
 
 protected:
 	// Called when the game starts or when spawned

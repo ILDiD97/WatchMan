@@ -7,6 +7,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GuardianHUD.h"
+#include "ItemBase.h"
 #include "PlayerCamera.h"
 #include "PrisonerCharacterController.h"
 #include "TimeManager.h"
@@ -75,7 +76,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	bool WaitToCameraRot;
 
-	UPROPERTY(VisibleAnywhere, Category = "Interface")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Interface")
 	AGuardianHUD* GuardianHUD;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Interface")
@@ -84,8 +85,17 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Time")
 	TSubclassOf<ATimeManager> TimeManagerClass;
 
-	UPROPERTY(VisibleAnywhere,Category = "Time")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Time")
 	ATimeManager* TimeManager;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Time")
+	int CurrentDay;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
+	AItemBase* Item;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
+	int ItemPrisoner;
 	
 	UFUNCTION()
 	void StartSpawnPrisoners();
@@ -132,7 +142,12 @@ public:
 	void DeselectPrisoner(const FInputActionValue& Value);
 
 	UFUNCTION(BlueprintCallable)
+	void ItemAction(EActionPrisoner usage);
+
+	UFUNCTION(BlueprintCallable)
 	void EndDay();
 
 	void ShowInputMessage(FString Message);
+	
+	virtual void Tick(float DeltaSeconds) override;
 };

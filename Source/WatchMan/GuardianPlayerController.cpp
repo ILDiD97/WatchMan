@@ -176,12 +176,27 @@ void AGuardianPlayerController::DeselectPrisoner(const FInputActionValue& Value)
 	CurrentController = nullptr;
 }
 
+void AGuardianPlayerController::ItemAction(EActionPrisoner usage)
+{
+	Item->ChooseAction(usage);
+}
+
 void AGuardianPlayerController::EndDay()
 {
-	TimeManager->NextDay();
+	CurrentDay = TimeManager->NextDay();
 }
 
 void AGuardianPlayerController::ShowInputMessage(FString Message)
 {
 	GEngine->AddOnScreenDebugMessage(FMath::Rand(), 0.2f, FColor::Magenta, Message);
+}
+
+void AGuardianPlayerController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if(Item)
+	{
+		Item->SetActorTransform(PrisonersController[ItemPrisoner]->Prisoner->GetTransform());
+	}
 }
