@@ -97,6 +97,12 @@ void AGuardianPlayerController::PlayerCameraChange(const FInputActionValue& Valu
 	}
 }
 
+void AGuardianPlayerController::ResetCameraToStart()
+{
+	CameraChange = false;
+	ChangeCamera();
+}
+
 void AGuardianPlayerController::ChangeCamera()
 {
 	PlayerCamera->ChangeCamera(CameraChange);
@@ -118,7 +124,8 @@ APlayerCamera* AGuardianPlayerController::CameraCurrentRot()
 
 void AGuardianPlayerController::OnStartedInput(const FInputActionValue& Value)
 {
-	if(CurrentController && CameraChange && !IsWidgetControlled)
+	if(CurrentController && CameraChange
+		&& !IsWidgetControlled && CurrentController->IsPlayerControlled)
 	{
 		CurrentController->StopMovement();
 	}
@@ -135,11 +142,19 @@ void AGuardianPlayerController::SelectPrisoner(const FInputActionValue& Value)
 		if (bHitSuccessful)
 		{
 			const APrisonerCharacter* charSelected = Cast<APrisonerCharacter>(Hit.GetActor());
+			
 			if(charSelected)
 			{
 				CurrentID = Cast<APrisonerCharacterController>(
 					charSelected->GetController())->ID;
+				if (CurrentController != nullptr &&
+					PrisonersController[CurrentID] != CurrentController)
+				{
+					CurrentController->IsPlayerControlled = false;
+				}
 				CurrentController = PrisonersController[CurrentID];
+				CurrentController->IsPlayerControlled = true;
+				SelectedPrisonerVisibility();
 			}
 		}
 	}
@@ -174,11 +189,15 @@ void AGuardianPlayerController::GiveLocation(const FInputActionValue& Value)
 void AGuardianPlayerController::DeselectPrisoner(const FInputActionValue& Value)
 {
 	CurrentController = nullptr;
+	DeselectPrisonerVisibility();
 }
 
 void AGuardianPlayerController::ItemAction(EActionPrisoner usage)
 {
-	Item->ChooseAction(usage);
+	if(Item)
+	{
+		Item->ChooseAction(usage);
+	}
 }
 
 void AGuardianPlayerController::EndDay()

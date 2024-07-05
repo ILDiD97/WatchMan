@@ -58,7 +58,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoners")
 	APrisonerCharacterController* CurrentController;
 	
-	UPROPERTY(VisibleAnywhere, Category = "Prisoners")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Prisoners")
 	int CurrentID;
 	
 	UPROPERTY(EditAnywhere, Category = "Prisoners")
@@ -97,6 +97,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
 	int ItemPrisoner;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
+	int PrisonerSub;
+	
 	UFUNCTION()
 	void StartSpawnPrisoners();
 
@@ -116,9 +119,15 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void CameraChangeRotation();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetCameraToStart();
 	
 	UFUNCTION(BlueprintCallable)
 	void ChangeCamera();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void DeselectPrisonerVisibility();
 
 	UFUNCTION(BlueprintPure)
 	FRotator CameraRot();
@@ -131,6 +140,9 @@ public:
 	
 	UFUNCTION()
 	void SelectPrisoner(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void SelectedPrisonerVisibility();
 
 	UFUNCTION()
 	void SelectLocation(const FInputActionValue& Value);

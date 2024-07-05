@@ -24,6 +24,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Controller")
 	int ID;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
+	bool IsPlayerControlled;
+
 	UPROPERTY(EditAnywhere, Category = "Controller")
 	TSubclassOf<APrisonerCharacter> PrisonerClass;
 
@@ -32,7 +35,12 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PrisonerStat")
 	FPrisonerStats Stats;
-	
+
+	UPROPERTY(EditAnywhere, Category = "Tree")
+	UBehaviorTree* AITree;
+
+	UPROPERTY(EditAnywhere, Category = "Tree")
+	UBlackboardComponent* BBTree;
 
 	UFUNCTION()
 	void SpawnPrisoners(FTransform controllerTransform, int currentID);

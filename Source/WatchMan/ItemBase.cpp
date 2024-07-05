@@ -29,7 +29,6 @@ void AItemBase::Tick(float DeltaTime)
 
 void AItemBase::ChooseAction(EActionPrisoner usage)
 {
-	Action = usage;
 	switch (usage)
 	{
 		case EActionPrisoner::Use:
@@ -45,10 +44,11 @@ void AItemBase::ChooseAction(EActionPrisoner usage)
 
 void AItemBase::UseItem()
 {
-	
+	CurrentAction = Action;
 }
 
 void AItemBase::GiveItem()
 {
+	CurrentAction = EActionAnimation::Give;
 }
 

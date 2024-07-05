@@ -27,14 +27,17 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Item")
 	UStaticMeshComponent* ItemMesh;
 
-	UPROPERTY(VisibleAnywhere, Category = "Prisoner")
-	APrisonerCharacterController* PrisonerOwner;
-
-	UPROPERTY(VisibleAnywhere, Category = "Prisoner")
-	APrisonerCharacterController* PrisonerReciever;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int PrisonerID;
 
 	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
-	EActionPrisoner Action;
+	EActionAnimation Action;
+
+	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
+	EActionAnimation CurrentAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemAction")
+	bool UseOnPrisoner;
 	
 	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
 	bool Use;
