@@ -192,6 +192,7 @@ void AGuardianPlayerController::GiveLocation(const FInputActionValue& Value)
 
 void AGuardianPlayerController::DeselectPrisoner(const FInputActionValue& Value)
 {
+	CurrentController->IsPlayerControlled = false;
 	CurrentController = nullptr;
 	DeselectPrisonerVisibility();
 }
