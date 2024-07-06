@@ -8,6 +8,10 @@
 #include "CinematicCamera/Public/CineCameraComponent.h"
 #include "PlayerCamera.generated.h"
 
+
+// Moved this here to make it easier to change
+const float ROTATION_DELTA = 0.1f;
+
 UCLASS()
 class WATCHMAN_API APlayerCamera : public APawn
 {
@@ -43,6 +47,18 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "CameraStat")
 	FRotator InitialRot;
+
+	UPROPERTY(VisibleAnywhere, Category = "CameraStat")
+	float xRotAccel = 0.0f;
+
+	UPROPERTY(VisibleAnywhere, Category = "CameraStat")
+	float yRotAccel = 0.0f;
+
+	UPROPERTY(EditAnywhere, Category = "CameraStat")
+	float RotationHardness = 6.0f;;
+
+	UPROPERTY(VisibleAnywhere, Category = "CameraStat")
+	FVector2D MouseInput;
 	
 protected:
 	// Called when the game starts or when spawned

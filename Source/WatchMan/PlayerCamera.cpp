@@ -38,22 +38,26 @@ void APlayerCamera::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
-
-void APlayerCamera::CameraRotation(FVector2D rotationValue)
-{
 	const float relativeXRotation = CineCameraComponent->GetComponentRotation().Pitch;
-	const float XRotation = relativeXRotation + rotationValue.Y * VerticalRotationSpeed * 0.1;
+	xRotAccel = FMath::Lerp(xRotAccel, MouseInput.Y * VerticalRotationSpeed,RotationHardness  * DeltaTime);
+	const float XRotation = relativeXRotation + xRotAccel  * DeltaTime;
 	const float clampedXRotation = FMath::Clamp(XRotation, -VerticalMaxLimit, VerticalMaxLimit);
 	
 	const float relativeYRotation = CineCameraComponent->GetComponentRotation().Yaw;
-	const float YRotation = relativeYRotation + rotationValue.X * HorizontalRotationSpeed * 0.1f;
+	yRotAccel = FMath::Lerp(yRotAccel, MouseInput.X * HorizontalRotationSpeed,RotationHardness * DeltaTime);
+	const float YRotation = relativeYRotation + yRotAccel * DeltaTime;
 	const float clampedYRotation = FMath::Clamp(YRotation, -HotizontalMaxLimit, HotizontalMaxLimit);
-	
+
+
 	const FRotator CameraHorizontalRotation = FRotator(clampedXRotation,
 		clampedYRotation,
 		0);
 	CineCameraComponent->SetWorldRotation(CameraHorizontalRotation);
+}
+
+void APlayerCamera::CameraRotation(FVector2D rotationValue)
+{
+	MouseInput = rotationValue;
 }
 
 void APlayerCamera::ChangeCamera(bool change)
