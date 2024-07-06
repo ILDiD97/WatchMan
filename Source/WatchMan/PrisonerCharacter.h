@@ -39,6 +39,7 @@ UENUM(BlueprintType)
 enum class EActionAnimation : uint8
 {
 	BaseLocomotion UMETA(DisplayName = "BaseLocomotion"),
+	Sad UMETA(DisplayName = "Sad"),
 	Crying UMETA(DisplayName = "Crying"),
 	Sleeping UMETA(DisplayName = "Sleeping"),
 	Laughing UMETA(DisplayName = "Laughing"),

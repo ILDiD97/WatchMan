@@ -23,12 +23,13 @@ void APrisonerCharacterController::SpawnPrisoners(FTransform controllerTransform
 			PrisonerClass, &controllerTransform, SpawnParameters));
 		Possess(Prisoner);
 		Prisoner->SetSkeletalCharachter(MeshComponent);
+		BedLocation = controllerTransform.GetLocation();
 	}
 }
 
 void APrisonerCharacterController::MoveToMousePoint(FVector loc)
 {
-	//UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, loc);
+	CurrentMouseLocation = loc;
 }
 
 

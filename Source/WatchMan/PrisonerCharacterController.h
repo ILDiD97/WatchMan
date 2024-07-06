@@ -42,6 +42,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Tree")
 	UBlackboardComponent* BBTree;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AI")
+	FVector CurrentMouseLocation;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AI")
+	FVector BedLocation;
+
 	UFUNCTION()
 	void SpawnPrisoners(FTransform controllerTransform, int currentID, USkeletalMesh* MeshComponent);
 
