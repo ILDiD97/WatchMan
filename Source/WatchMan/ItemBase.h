@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PrisonerCharacterController.h"
+#include "QuestManager.h"
 #include "GameFramework/Actor.h"
 #include "ItemBase.generated.h"
 
@@ -33,7 +34,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoner")
 	APrisonerCharacterController* CurrentOwner;
 
-	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
+	UPROPERTY(EditAnywhere, Category = "ItemAction")
 	EActionAnimation Action;
 
 	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
@@ -41,6 +42,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemAction")
 	bool UseOnPrisoner;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
+	AQuestManager* QuestManager;
 
 
 protected:

@@ -47,4 +47,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void MoveToMousePoint(FVector loc);
+
 };
