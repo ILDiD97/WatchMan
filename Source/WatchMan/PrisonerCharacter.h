@@ -38,6 +38,7 @@ struct WATCHMAN_API FDataPrisoner : public FTableRowBase
 UENUM(BlueprintType)
 enum class EActionAnimation : uint8
 {
+	BaseLocomotion UMETA(DisplayName = "BaseLocomotion"),
 	Crying UMETA(DisplayName = "Crying"),
 	Sleeping UMETA(DisplayName = "Sleeping"),
 	Laughing UMETA(DisplayName = "Laughing"),

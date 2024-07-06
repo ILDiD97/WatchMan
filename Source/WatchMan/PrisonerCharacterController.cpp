@@ -28,7 +28,7 @@ void APrisonerCharacterController::SpawnPrisoners(FTransform controllerTransform
 
 void APrisonerCharacterController::MoveToMousePoint(FVector loc)
 {
-	UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, loc);
+	//UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, loc);
 }
 
 

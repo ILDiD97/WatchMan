@@ -65,7 +65,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Prisoners")
 	int CurrentID;
 	
-	UPROPERTY(EditAnywhere, Category = "Prisoners")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Prisoners")
 	FVector CachedDestination;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Prisoners")
