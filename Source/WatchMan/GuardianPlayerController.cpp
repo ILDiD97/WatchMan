@@ -29,12 +29,15 @@ void AGuardianPlayerController::StartSpawnPrisoners()
 				Cast<APrisonerCharacterController>(world->SpawnActor(
 					PrisonerControllerClass, &SpawnTransforms[i],SpawnParameters));
 			controller->ID = i;
-			controller->SpawnPrisoners(SpawnTransforms[i], i);
+			controller->SpawnPrisoners(SpawnTransforms[i], i, SkeletalMeshes[i]);
 			PrisonersController.Add(controller);
 		}
 
 		TimeManager = Cast<ATimeManager>(world->SpawnActor(
 			TimeManagerClass, &PlayerCamera->GetTransform(),SpawnParameters));
+
+		QuestManager = Cast<AQuestManager>(world->SpawnActor(
+			QuestManagerClass, &PlayerCamera->GetTransform(), SpawnParameters));
 	}
 }
 
@@ -99,6 +102,7 @@ void AGuardianPlayerController::PlayerCameraChange(const FInputActionValue& Valu
 
 void AGuardianPlayerController::ResetCameraToStart()
 {
+	WaitToCameraRot = false;
 	CameraChange = false;
 	ChangeCamera();
 }
@@ -196,7 +200,8 @@ void AGuardianPlayerController::ItemAction(EActionPrisoner usage)
 {
 	if(Item)
 	{
-		Item->ChooseAction(usage);
+		CurrentController->Prisoner->ActionAnimation =
+			Item->ChooseAction(usage, CurrentController);
 	}
 }
 

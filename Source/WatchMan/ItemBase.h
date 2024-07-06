@@ -30,6 +30,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int PrisonerID;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoner")
+	APrisonerCharacterController* CurrentOwner;
+
 	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
 	EActionAnimation Action;
 
@@ -38,12 +41,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemAction")
 	bool UseOnPrisoner;
-	
-	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
-	bool Use;
-
-	UPROPERTY(VisibleAnywhere, Category = "ItemAction")
-	bool Give;
 
 
 protected:
@@ -54,9 +51,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void ChooseAction(EActionPrisoner usage);
+	virtual EActionAnimation ChooseAction(EActionPrisoner usage, APrisonerCharacterController* owner);
 	
-	virtual void UseItem();
+	virtual EActionAnimation UseItem();
 
-    virtual void GiveItem();
+    virtual EActionAnimation GiveItem();
 };

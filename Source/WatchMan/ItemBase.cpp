@@ -27,28 +27,29 @@ void AItemBase::Tick(float DeltaTime)
 
 }
 
-void AItemBase::ChooseAction(EActionPrisoner usage)
+EActionAnimation AItemBase::ChooseAction(EActionPrisoner usage, APrisonerCharacterController* owner)
 {
+	CurrentOwner = owner;
 	switch (usage)
 	{
 		case EActionPrisoner::Use:
-			UseItem();
-			break;
+			return UseItem();
 		case EActionPrisoner::Give:
-			GiveItem();
-			break;
+			return GiveItem();
 		default:
-			break;
+			return EActionAnimation::Laughing;
 	}
 }
 
-void AItemBase::UseItem()
+EActionAnimation AItemBase::UseItem()
 {
 	CurrentAction = Action;
+	return Action;
 }
 
-void AItemBase::GiveItem()
+EActionAnimation AItemBase::GiveItem()
 {
 	CurrentAction = EActionAnimation::Give;
+	return EActionAnimation::Give;
 }
 

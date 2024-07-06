@@ -11,7 +11,8 @@ void APrisonerCharacterController::BeginPlay()
 	
 }
 
-void APrisonerCharacterController::SpawnPrisoners(FTransform controllerTransform, int currentID)
+void APrisonerCharacterController::SpawnPrisoners(FTransform controllerTransform,
+	int currentID, USkeletalMesh* MeshComponent)
 {
 	UWorld* world = GetWorld();
 	
@@ -21,6 +22,7 @@ void APrisonerCharacterController::SpawnPrisoners(FTransform controllerTransform
 		Prisoner = Cast<APrisonerCharacter>(world->SpawnActor(
 			PrisonerClass, &controllerTransform, SpawnParameters));
 		Possess(Prisoner);
+		Prisoner->SetSkeletalCharachter(MeshComponent);
 	}
 }
 

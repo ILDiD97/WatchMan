@@ -10,6 +10,7 @@
 #include "ItemBase.h"
 #include "PlayerCamera.h"
 #include "PrisonerCharacterController.h"
+#include "QuestManager.h"
 #include "TimeManager.h"
 #include "GuardianPlayerController.generated.h"
 
@@ -51,6 +52,9 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoners")
 	TArray<APrisonerCharacterController*> PrisonersController;
+
+	UPROPERTY(EditAnywhere, Category = "Prisoner")
+	TArray<USkeletalMesh*> SkeletalMeshes;
 	
 	UPROPERTY(EditAnywhere, Category = "Prisoners")
 	TArray<FTransform> SpawnTransforms;
@@ -99,6 +103,12 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item")
 	int PrisonerSub;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	TSubclassOf<AQuestManager> QuestManagerClass;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Quest")
+	AQuestManager* QuestManager;
 	
 	UFUNCTION()
 	void StartSpawnPrisoners();

@@ -30,7 +30,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Controller")
 	TSubclassOf<APrisonerCharacter> PrisonerClass;
 
-	UPROPERTY(EditAnywhere, Category = "Controller")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
 	APrisonerCharacter* Prisoner;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PrisonerStat")
@@ -43,7 +43,7 @@ public:
 	UBlackboardComponent* BBTree;
 
 	UFUNCTION()
-	void SpawnPrisoners(FTransform controllerTransform, int currentID);
+	void SpawnPrisoners(FTransform controllerTransform, int currentID, USkeletalMesh* MeshComponent);
 
 	UFUNCTION(BlueprintCallable)
 	void MoveToMousePoint(FVector loc);
