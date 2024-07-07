@@ -21,7 +21,7 @@ protected:
 
 public:
 
-	UPROPERTY(EditAnywhere, Category = "Controller")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
 	int ID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Controller")
