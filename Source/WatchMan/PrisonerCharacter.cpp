@@ -2,6 +2,7 @@
 
 
 #include "PrisonerCharacter.h"
+#include "PrisonerStatistics.h"
 
 
 // Sets default values
@@ -9,6 +10,8 @@ APrisonerCharacter::APrisonerCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	Stats = CreateDefaultSubobject<UPrisonerStatistics>(TEXT("Stats"));
 
 }
 
@@ -23,12 +26,16 @@ void APrisonerCharacter::BeginPlay()
 void APrisonerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
 
-	if(Stats.Health <= 0)
-	{
-		ActionAnimation = EActionAnimation::Damaged;
-		IsInAction = true;
-	}
+void APrisonerCharacter::SetActionAnimation(EActionAnimation Action)
+{
+	ActionAnimation = Action;
+}
+
+void APrisonerCharacter::InitStats(FPrisonerStats Data)
+{
+	Stats->InitializeStats(Data);
 }
 
 

@@ -18,13 +18,16 @@ public:
 	FString Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Health;
+	FVector2D SanityLossRange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Madness;
+	FVector2D MoodLossRange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Mood;
+	float BaseSanity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BaseMood;
 	
 };
 
@@ -66,13 +69,13 @@ public:
 	// Sets default values for this character's properties
 	APrisonerCharacter();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PrisonerStats")
-	FPrisonerStats Stats;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Prisoner Stats")
+	class UPrisonerStatistics* Stats;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PrisonerAnimation")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoner Animation")
 	EActionAnimation ActionAnimation;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PrisonerAnimation")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Prisoner Animation")
 	bool IsInAction;
 
 protected:
@@ -85,4 +88,10 @@ public:
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void SetSkeletalCharachter(USkeletalMesh* SkeletalMeshComponent);
+
+	UFUNCTION(BlueprintCallable)
+	void SetActionAnimation(EActionAnimation Action);
+
+	UFUNCTION(BlueprintCallable)
+	void InitStats(FPrisonerStats Data);
 };

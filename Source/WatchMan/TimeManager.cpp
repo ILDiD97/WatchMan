@@ -6,7 +6,6 @@
 // Sets default values
 ATimeManager::ATimeManager()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -30,8 +29,11 @@ int ATimeManager::NextDay()
 	if(Days <= 6)
 	{
 		Days++;
+	
 	}
-
+	
+	OnDayEnd.Broadcast(Days);
+	
 	return Days;
 }
 

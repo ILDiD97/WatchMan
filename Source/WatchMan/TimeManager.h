@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "TimeManager.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDayEndHandler, int, Days);
+
 UCLASS()
 class WATCHMAN_API ATimeManager : public AActor
 {
@@ -20,6 +22,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool IsWin;
+
+	UPROPERTY(BlueprintAssignable)
+	FDayEndHandler OnDayEnd;
 	
 protected:
 	// Called when the game starts or when spawned
