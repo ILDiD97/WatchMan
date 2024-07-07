@@ -220,9 +220,5 @@ void AGuardianPlayerController::ShowInputMessage(FString Message)
 void AGuardianPlayerController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
-	if(Item)
-	{
-		Item->SetActorTransform(PrisonersController[ItemPrisoner]->Prisoner->GetTransform());
-	}
+	
 }

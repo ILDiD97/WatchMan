@@ -166,6 +166,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ItemAction(EActionPrisoner usage);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void AttachItemToSocket();
+
 	UFUNCTION(BlueprintCallable)
 	void EndDay();
 

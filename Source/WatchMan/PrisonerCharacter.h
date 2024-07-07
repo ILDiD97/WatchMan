@@ -18,10 +18,13 @@ public:
 	FString Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Health;
+	float Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Madness;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Mood;
 	
 };
 
@@ -48,6 +51,7 @@ enum class EActionAnimation : uint8
 	Give UMETA(DisplayName = "Give"),
 	Eat UMETA(DisplayName = "Eat"),
 	Read UMETA(DisplayName = "Read"),
+	LazeAround UMETA(DisplayName = "LazeAround"),
 	ThrowCoin UMETA(DisplayName = "ThrowCoin"),
 	Damaged UMETA(DisplayName = "Damaged"),
 	Dead UMETA(DisplayName = "Dead"),

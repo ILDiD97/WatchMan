@@ -23,7 +23,12 @@ void APrisonerCharacter::BeginPlay()
 void APrisonerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+
+	if(Stats.Health <= 0)
+	{
+		ActionAnimation = EActionAnimation::Damaged;
+		IsInAction = true;
+	}
 }
 
 
