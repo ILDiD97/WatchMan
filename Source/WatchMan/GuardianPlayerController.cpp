@@ -203,6 +203,7 @@ void AGuardianPlayerController::ItemAction(EActionPrisoner usage)
 	{
 		CurrentController->Prisoner->ActionAnimation =
 			Item->ChooseAction(usage, CurrentController);
+		CurrentController->Prisoner->IsInAction = true;
 	}
 }
 

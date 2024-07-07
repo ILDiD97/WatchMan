@@ -29,7 +29,10 @@ void APrisonerCharacterController::SpawnPrisoners(FTransform controllerTransform
 
 void APrisonerCharacterController::MoveToMousePoint(FVector loc)
 {
-	CurrentMouseLocation = loc;
+	if(Prisoner->ActionAnimation != EActionAnimation::Dead)
+	{
+		CurrentMouseLocation = loc;
+	}
 }
 
 
