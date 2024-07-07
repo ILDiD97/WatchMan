@@ -56,6 +56,7 @@ enum class EActionAnimation : uint8
 	Read UMETA(DisplayName = "Read"),
 	LazeAround UMETA(DisplayName = "LazeAround"),
 	ThrowCoin UMETA(DisplayName = "ThrowCoin"),
+	Win UMETA(DisplayName = "Win"),
 	Damaged UMETA(DisplayName = "Damaged"),
 	Dead UMETA(DisplayName = "Dead"),
 };

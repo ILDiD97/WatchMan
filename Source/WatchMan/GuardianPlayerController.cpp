@@ -73,8 +73,8 @@ void AGuardianPlayerController::SetupInputComponent()
 	Input->BindAction(PrisonerSelectionInput,
 		ETriggerEvent::Canceled, this, &AGuardianPlayerController::GiveLocation);
 	
-	Input->BindAction(PrisonerDeselectionInput,
-		ETriggerEvent::Completed, this, &AGuardianPlayerController::DeselectPrisoner);
+	//Input->BindAction(PrisonerDeselectionInput,
+		//ETriggerEvent::Completed, this, &AGuardianPlayerController::DeselectPrisoner);
 
 }
 

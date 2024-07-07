@@ -15,17 +15,15 @@ UPrisonerStatistics::UPrisonerStatistics()
 
 void UPrisonerStatistics::OnDayEnd(int Days)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Day %d"), Days);
-
 	const float SanityLoss = FMath::RandRange(SanityLossRange.X, SanityLossRange.Y);
-	BaseSanity -= SanityLoss + SanityPenaltyThisDay;
+	BaseSanity += SanityLoss + SanityPenaltyThisDay;
 
 	const float MoodLoss = FMath::RandRange(MoodLossRange.X, MoodLossRange.Y);
-	BaseMood -= MoodLoss + MoodPenaltyThisDay;
+	BaseMood += MoodLoss + MoodPenaltyThisDay;
 
 	if(BaseMood < MoodBreakPoint && RollADice(12) > 7)
 	{
-		OwnerCharacter->SetActionAnimation(EActionAnimation::Sad);
+		//OwnerCharacter->SetActionAnimation(EActionAnimation::Sad);
 	}
 
 	IsInsane = BaseSanity < SanityBreakPoint && RollADice(12) > 7;
