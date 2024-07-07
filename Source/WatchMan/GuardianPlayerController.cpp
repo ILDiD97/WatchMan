@@ -204,6 +204,11 @@ void AGuardianPlayerController::ItemAction(EActionPrisoner usage)
 	}
 }
 
+void AGuardianPlayerController::AttachItem()
+{
+	AttachItemToSocket();
+}
+
 void AGuardianPlayerController::EndDay()
 {
 	CurrentDay = TimeManager->NextDay();

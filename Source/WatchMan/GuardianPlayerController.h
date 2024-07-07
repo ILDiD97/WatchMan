@@ -163,6 +163,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ItemAction(EActionPrisoner usage);
 
+	UFUNCTION(BlueprintCallable)
+	void AttachItem();
+	
 	UFUNCTION(BlueprintImplementableEvent)
 	void AttachItemToSocket();
 
