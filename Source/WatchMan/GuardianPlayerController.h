@@ -86,9 +86,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Interface")
 	bool IsWidgetControlled;
 
-	UPROPERTY(EditAnywhere, Category = "Time")
-	TSubclassOf<ATimeManager> TimeManagerClass;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Time")
 	ATimeManager* TimeManager;
 

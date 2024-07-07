@@ -33,9 +33,6 @@ void AGuardianPlayerController::StartSpawnPrisoners()
 			PrisonersController.Add(controller);
 		}
 
-		TimeManager = Cast<ATimeManager>(world->SpawnActor(
-			TimeManagerClass, &PlayerCamera->GetTransform(),SpawnParameters));
-
 		QuestManager = Cast<AQuestManager>(world->SpawnActor(
 			QuestManagerClass, &PlayerCamera->GetTransform(), SpawnParameters));
 	}

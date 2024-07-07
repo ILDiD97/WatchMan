@@ -25,3 +25,20 @@ void AQuestManager::Tick(float DeltaTime)
 
 }
 
+void AQuestManager::SetQuestBool(int idQuest, bool isCompleted)
+{
+	Quests[idQuest].QuestCompleted = isCompleted;
+}
+
+bool AQuestManager::EvaluateQuestsBool()
+{
+	for (FQuestStruct Element : Quests)
+	{
+		if(Element.QuestCompleted) Counter++;
+	}
+
+	if(Counter > 5) return true;
+	else if (Counter == 0) return true;
+	else return false;
+}
+

@@ -40,4 +40,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Counter;
+	
+	UFUNCTION(BlueprintCallable)
+	void SetQuestBool(int idQuest, bool isCompleted);
+
+	UFUNCTION(BlueprintCallable)
+	bool EvaluateQuestsBool();
 };
